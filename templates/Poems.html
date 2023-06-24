@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaxing Radio | categorys...</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <form action="{% url 'home' %}" method="GET">
+        <label for="category-select">Select a category:</label>
+        <select id="category-select" name="category">
+            <option value="">All Categories</option>
+            <option value="love" {% if selected_category == "love" %}selected{% endif %}>Love</option>
+            <option value="sad" {% if selected_category == "sad" %}selected{% endif %}>Sad</option>
+            <option value="motivational" {% if selected_category == "motivational" %}selected{% endif %}>Motivational</option>
+            <option value="expressive" {% if selected_category == "expressive" %}selected{% endif %}>Expressive</option>
+            <!-- Add more genres as needed -->
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+    {% if poems %}
+        {% for poem in poems %}
+             <h1>{{ poem.title }}</h1>
+        <p>Publish date: 06/10/2023.</p>
+        <p>Author: {{ poem.author }}</p>
+        <div>
+            <a href="#">
+                <img src="{{ poem.image.url }}" alt="Author Image">
+            </a>
+        </div>
+
+<div>
+
+                <a href="{% url 'poem-detail' slug=poem.slug pk=poem.pk %}"> View this post
+</a>
+</div>
+
+<!-- p{{ poem.content }} -->
+        {% empty %}
+         <p>No poems found.</p>
+        {% endfor %}
+    {% else %}
+        <p>No poems found.</p>
+   {% endif %}
+    <script>
+        const categorySelect = document.getElementById('category-select');
+        const searchButton = document.querySelector('button[type="submit"]');
+
+        searchButton.addEventListener('click', function() {
+            const selectedCategory = categorySelect.value;
+            window.location.href = window.location.pathname + '?category=' + encodeURIComponent(selectedCategory);
+        });
+    </script>
+</body>
+
+</html>

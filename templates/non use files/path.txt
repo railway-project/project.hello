@@ -1,0 +1,32 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poetry Search</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <h1>Poetry Search</h1>
+    <form action="{% url 'search' %}" method="GET">
+        <input type="text" name="query" placeholder="Search poetry...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+    <h2>Search Results for "{{ query }}"</h2>
+    <ul>
+        {% for poem in results %}
+        <li>
+            <h3>{{ poem.title }}</h3>
+            <p>Author: {{ poem.author }}</p>
+            <p>Category: {{ poem.category }}</p>
+            <!-- Display other relevant poem information -->
+        </li>
+        {% empty %}
+        <li>No results found.</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
