@@ -1,45 +1,105 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Poetry Search</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="{% static 'js/script.js' %}"></script>
+
     <style>
-        .reset-button {
-            margin-left: 10px;
+        body {
+          background-color: black;
+          color: white;
+          padding: 3px;
         }
-    </style>
-</head>
-<body>
-    <form action="{% url 'search' %}" method="GET">
-        <input type="text" name="query" id="queryInput" placeholder="Search anything :-)...">
-        <button type="submit">Search</button>
-        <button type="button" class="reset-button" onclick="resetForm()">Clear</button>
-    </form>
 
-    {% if query and results %}
-    <h2>Search Results for "{{ query }}"</h2>
-    <ul>
-        {% for poem in results %}
-        <li>
-            <h3><a href="{% url 'poem-detail' slug=poem.slug pk=poem.pk %}">{{ poem.title }}</a></h3>
-            <p>Author: {{ poem.author }}</p>
-            {% if poem.image %}
-            <img src="{{ poem.image.url }}" alt="{{ poem.author }}">
-            {% endif %}
-            <p>Category: {{ poem.category }}</p>
-            <!-- Display other relevant poem information -->
-        </li>
-        {% empty %}
-        <li>No results found.</li>
-        {% endfor %}
-    </ul>
-    {% elif query %}
-    <p>No results found.</p>
-    {% endif %}
+        .bg-green-200 {
+          background-color: black;
+        }
 
+        .border-gray-300 {
+          border-color: gray;
+        }
+
+        .focus\\:outline-none:focus {
+          outline: none;
+        }
+
+        .focus\\:ring-2:focus {
+          box-shadow: none;
+        }
+
+        .focus\\:ring-blue-500:focus {
+          --tw-ring-color: #00a3ff;
+        }
+
+        .bg-blue-500 {
+          background-color: #00a3ff;
+        }
+
+        .text-white {
+          color: white;
+        }
+
+        .bg-gray-300 {
+          background-color: gray;
+        }
+
+        .text-gray-700 {
+          color: gray;
+        }
+
+        input[type="text"],
+        input[type="text"]:focus {
+          height: 2.25rem; /* Set the height of the text field */
+        }
+
+        .clear-button {
+          background-color: red; /* Set the background color of the clear button to red */
+          color: white; /* Set the text color of the clear button to white */
+        }
+      </style>
+    </head>
+
+    <body class="p-4 bg-green-200">
+
+    <!-- Search Bar -->
+    <div class="fixed top-0 left-0 p-4">
+        <form action="{% url 'search' %}" method="GET"   class="flex items-center">
+            <input type="text" name="query" id="queryInput" placeholder="Search anything :-)... " class="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Search</button>
+            <button type="button" class="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md" onclick="resetForm()">Clear</button>
+        </form>
+    </div>
+    <!-- Search Bar end -->
+
+    <div class="mt-16"><!-- Add this margin-top to avoid overlap with the fixed search bar -->
+
+        <!-- Your existing content goes here (rest of the page) -->
+
+        {% if query and results %}
+        <h2 class="text-2xl font-bold mt-4">Search Results for "{{ query }}"</h2>
+        <ul class="mt-4">
+            {% for poem in results %}
+            <li class="my-4">
+                <h3><a href="{% url 'poem-detail' slug=poem.slug pk=poem.pk %}" class="text-blue-500 underline">{{ poem.title }} <img src="{{ poem.thumbnail }}" alt="thumbnail" class="w-8 h-8"></a></h3>
+                <p>Author: {{ poem.author }}</p>
+                {% if poem.image %}
+                <img src="{{ poem.image.url }}" alt="{{ poem.author }}" class="my-4">
+                {% endif %}
+                <p>Category: {{ poem.category }}</p>
+            </li>
+            {% empty %}
+            <li>No results found.</li>
+            {% endfor %}
+        </ul>
+        {% elif query %}
+        <p>No results found.</p>
+        {% endif %}
+    </div>
+
+    <!-- Your script and closing body/html tags go here -->
     <script>
         function resetForm() {
             document.getElementById('queryInput').value = '';

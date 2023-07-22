@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+#import dj_database_url
 
 from dotenv import load_dotenv
 
@@ -38,12 +39,22 @@ ALLOWED_HOSTS = [
     '*',
     'localhost',
     '127.0.0.1',
-    'a013-2405-201-4043-8045-f437-8507-742-cac3.ngrok-free.app',
+    'a013-2405-201-4043-8045-f437-8507-742-cac3.ngrok-free.app',]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://5214-2405-201-4043-8045-b1fc-b7b8-2183-c034.ngrok-free.app',
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://5214-2405-201-4043-8045-b1fc-b7b8-2183-c034.ngrok-free.app'
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://8f1d-2405-201-4043-8045-59a8-8909-b2f2-3b35.ngrok-free.app']
-CSRF_TRUSTED_ORIGINS = ['http://8f1d-2405-201-4043-8045-59a8-8909-b2f2-3b35.ngrok.io']
-
+CORS_ALLOWED_ORIGINS = [
+    'https://neeraj-production.up.railway.app',
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://neeraj-production.up.railway.app'
+]
+ROOT_URLCONF = 'sendjoke.urls'
 
 # Application definition
 INSTALLED_APPS = [
@@ -60,8 +71,8 @@ INSTALLED_APPS = [
     'myproject',
     'poems',
 ]
-#SITE_ID = 1
-#current_site = None
+SITE_ID = 1
+current_site = None
 MIDDLEWARE = [
 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -111,6 +122,17 @@ DATABASES = {
     }
 }
 
+
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.environ.get('PGDATABASE', 'railway'),
+        #'USER': os.environ.get('PGUSER', 'postgres'),
+        #'PASSWORD': os.environ.get('PGPASSWORD', 'KyRTRXp5jCyBWI26qwiY'),
+        #'HOST': os.environ.get('PGHOST', 'containers-us-west-83.railway.app'),
+        #'PORT': os.environ.get('PGPORT', '5807'),
+    #}
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils.text import slugify
 
+
 class Poem(models.Model):
     CATEGORY_CHOICES = [
         ('love', 'Love'),
         ('motivational', 'Motivational'),
         ('sad', 'Sad'),
-        # Add more categories as needed
+        # Add more categories will add soon 
     ]
 
     id = models.AutoField(primary_key=True)
@@ -14,17 +15,22 @@ class Poem(models.Model):
     author = models.CharField(max_length=100)
     content = models.TextField()
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='uncategorized')
-    image = models.ImageField(upload_to='poem_images/', default='rishi-image.jpg')
+    thumbnail = models.ImageField(upload_to='poem_thumbnails/', null=True, blank=True)
+    authors_image = models.ImageField(upload_to='poem_images/', default='rishi-image.jpg')
+    main_image = models.ImageField(upload_to='poem_images/', null=True, blank=True)
     is_new = models.BooleanField(default=True)
     slug = models.SlugField(unique=True, blank=True)
     views = models.IntegerField(default=0)
-    publish_date= models.DateField(auto_now_add=True)
+    publish_date = models.DateField(auto_now_add=True)
+
     def save(self, *args, **kwargs):
         if not self.slug:  # Check if the slug is empty
             self.slug = slugify(self.title)  # Generate the slug if it is empty
         super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     poem = models.ForeignKey(Poem, on_delete=models.CASCADE, related_name='comments')

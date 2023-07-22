@@ -13,7 +13,7 @@ def search(request):
     context = {
         'query': query,
         'results': poems,
-        'selected_category': '',  # Set selected category as empty for search results
+        'selected_category': '',  
     }
     return render(request, 'index.html', context=context)
 

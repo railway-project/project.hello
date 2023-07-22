@@ -2,32 +2,83 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="{% static 'js/script.js' %}"></script>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <script src="{% static 'js/script.js' %}"></script>
+<style>
+        body {
+            background-color: #000;
+            color: #fff;
+            padding: 3px; /* Set the padding to 3px */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            background-color: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: #fff;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #34D399;
+        }
+
+        .bg-card {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .text-card {
+            color: #000;
+        }
+
+        .time {
+            color: #999;
+        }
+
+        .btn {
+            background-color: #34D399;
+            color: #fff;
+        }
+
+        .btn:hover {
+            background-color: #059669;
+        }
+    </style>
 </head>
 
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<body class="py-8">
     
-    <form method="post" style="margin-top: 1.3em;">
+    <form method="post"  class="max-w-md mx-auto bg-card p-8 rounded-lg shadow-lg">
         {% csrf_token %}
         {{ comment_form.as_p }}
-        <button type="submit" class="btn btn-primary btn-lg">Send</button>
+     <button type="submit" class="btn font-bold py-2 px-4 rounded"> Send
+        </button>
     </form>
 
-    <h2>{{ comments.count }} comments</h2>
-
-    {% for comment in comments %}
-    <div class="comments" style="padding: 10px;">
-        <p class="font-weight-bold">
+        <h2 class="text-2xl mt-8"> {{ comments.count }} comments{% for comment in comments %}</h2>
+    <div class="bg-card p-4 rounded-lg shadow-lg mt-4">
+        <p class="font-bold">
             {{ comment.name }}
-            <span class="text-muted font-weight-normal">
+            <span class="text-card font-normal">
                 {{ comment.created_on }}
             </span>
         </p>
