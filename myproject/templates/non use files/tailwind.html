@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaxing Radio</title>
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com/2.2.15/tailwind.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        /* Additional styles for navigation bar */
+        .max-w-screen-xl {
+            padding: 5px;
+        }
+
+        .text-2xl {
+            font-size: 1.3rem;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .md:flex-row {
+            flex-direction: row;
+        }
+
+        .md:p-0 {
+            padding: 2px;
+        }
+
+        .md:space-x-8 {
+            gap: 3rem;
+        }
+
+        /* Increase font size of navigation links */
+        .text-base {
+            font-size: 1.5rem;
+        }
+
+        /* Position the logo below the navigation links */
+        .md:flex-row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* Decrease size of the navigation bar */
+        .p-6 {
+            padding: 2px;
+        }
+
+        /* Increase size of navigation links on hover */
+        .md:hover .text-base {
+            font-size: 1.8rem;
+        }
+
+        /* Show navigation links when the button is clicked */
+        .show-navbar {
+            display: block;
+        }
+
+        /* Show navigation links for mobile devices */
+        @media (max-width: 767px) {
+            .show-navbar.md:hidden {
+                display: block;
+            }
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com/2.2.15/tailwind.min.js"></script>
+</head>
+
+<body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var button = document.querySelector("[data-collapse-toggle]");
+        var navbar = document.getElementById("navbar-default");
+
+        button.addEventListener("click", function() {
+            navbar.classList.toggle("show-navbar");
+        });
+    });
+</script>
+
+<header>
+    <a href="#">Skip to main area</a>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-6">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-6 md:p-0 mt-6 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 show-navbar">
+                    <li>
+                        <a href="{% url 'home' %}" class="block py-3 pl-4 pr-5 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-3 pl-4 pr-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Latus Poems</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-3 pl-4 pr-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Categories</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'aboutus' %}" class="block py-3 pl-4 pr-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-3 pl-4 pr-5 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="#" class="flex items-center">
+                <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="h-12 mr-4" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Relaxing Radio</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-3 ml-4 text-base text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+
+</body>
+
+</html>

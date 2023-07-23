@@ -1,0 +1,43 @@
+
+{% load social_share %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search _ Result= | Poetry</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+</head>
+<body>
+        <a href="#">Skip to main area</a>
+<h1> Latus-Poetry!</h1>
+
+    <h2>{{ poem.title }}</h1>
+    <p>Author: {{ poem.author }}</p>
+    {% if poem.image %}
+    <img src="{{ poem.image.url }}" alt="{{ poem.author }}">
+    {% endif %}
+    <p>Category: {{ poem.category }}</p>
+    <p>{{ poem.content }}</p>
+
+<p>Share this</p>
+
+        {% post_to_whatsapp poem.get_absolute_url "Share on WhatsApp" %}
+ 
+        {% post_to_facebook poem.get_absolute_url "Share on Facebook" %}
+
+
+        {% post_to_telegram "Check out this poem!" poem.get_absolute_url "Share on Telegram" %}
+        {% post_to_twitter "Check out this poem!" poem.get_absolute_url "Share on Twitter" %}
+        
+        {% send_email "Subject" "Check out this poem!" poem.get_absolute_url "Share via Email" %}
+        {% post_to_reddit "Check out this poem!" poem.get_absolute_url "Share on Reddit" %}
+
+<a href="{% url 'home' %}" class="btn btn-primary">Go to Home</a>
+
+{% include 'footer.html' %}
+
+</body>
+</html>
